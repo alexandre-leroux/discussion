@@ -30,3 +30,23 @@
   <?php
  include 'includes/nav-non-connecte.php';
  ?>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <?php
+  include 'includes/footer.php';
+  ?>
+
+
+</body>
+
+</html>

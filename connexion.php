@@ -31,14 +31,15 @@
  ?>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1605388862319-eaf1649edb5a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>Contact Me</h1>
-            <span class="subheading">Have questions? I have answers.</span>
+          <div class="page-heading pb-5">
+            <h1>Connectez-vous !</h1>
+            <span class="subheading">Vous avez des questions ? Nous avons les réponses.</span>
+            <img class='mt-3' src="images/drop-down-arrow.png" alt="fleche">
           </div>
         </div>
       </div>
@@ -49,42 +50,29 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
-        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+
         <form name="sentMessage" id="contactForm" novalidate>
+
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+              <label>Login</label>
+              <input type="text" class="form-control" placeholder="Login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
-          <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-              <label>Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
+  
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Phone Number</label>
-              <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+              <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
-          <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-              <label>Message</label>
-              <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
+
           <br>
+
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Se connecter</button>
         </form>
       </div>
     </div>
@@ -93,41 +81,9 @@
   <hr>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <?php
+  include 'includes/footer.php';
+  ?>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
