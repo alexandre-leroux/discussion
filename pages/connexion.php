@@ -79,7 +79,12 @@ $_SESSION['inscription_ok'] = NULL;
 
                         if ( $login == @$données_utilisateur['login'] AND password_verify($_POST['password'], $données_utilisateur['password'] ) )
                         {
-                          echo ' tout est ok, login et mdp';
+                          echo ' tout est ok, login et mdp <br>';
+                          $_SESSION['login']=$données_utilisateur['login'];
+                          $_SESSION['id']=$données_utilisateur['id'];
+                          echo $_SESSION['login'].'<br>';
+                          echo $_SESSION['id'].'<br>';
+
                         }
                         else { echo 'Erreur de login ou de mot de passe';}
 

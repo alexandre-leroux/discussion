@@ -1,5 +1,7 @@
 <?php session_start();
-$_SESSION['inscription_ok'] = NULL;
+if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../index.php');}
+// echo $_SESSION['login'].'<br>';
+// echo $_SESSION['id'].'<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -97,10 +97,10 @@ if ( isset($_POST['submit']) )
                                             'login' => $login,                                                                         
                                             'password' => $password,));
                                             echo 'check-2';
-                                             session_start(); 
-                                    $_SESSION['inscription_ok'] = 'Vous avez bien été inscrit sur le site';
+                                           
+                                   
 
-                                        header('Location: connexion.php');//redirection
+                                        header('Location: inscription-validee.php');//redirection
                                     
                                   }
 
