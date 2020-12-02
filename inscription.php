@@ -37,8 +37,9 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>About Me</h1>
-            <span class="subheading">This is what I do.</span>
+            <h1>Rejoingnez l'aventure !</h1>
+            <span class="subheading">...et entrez dans un nouveau monde.</span>
+            <img class='mt-3' src="images/drop-down-arrow.png" alt="fleche">
           </div>
         </div>
       </div>
@@ -47,25 +48,39 @@
 
 
 
+
+
+
+
+
+
  <!-- Main Content -->
  <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
-        <form name="sentMessage" id="contactForm" novalidate>
+        <form name="sentMessage" id="contactForm" action="inscription.php" method="post">
 
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Login</label>
-              <input type="text" class="form-control" placeholder="Login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
+              <label>Choisissez votre login</label>
+              <input type="text" class="form-control" placeholder="Choisissez votre login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
   
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <label>Mot de passe</label>
+              <input type="password" class="form-control" placeholder="Mot de passe" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Confirmer le mot de passe</label>
+              <input type="password" class="form-control" placeholder="Confirmer le mot de passe" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -73,7 +88,7 @@
           <br>
 
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Se connecter</button>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">C'est parti !</button>
         </form>
       </div>
     </div>
@@ -81,13 +96,12 @@
   <!-- Main Content -->
 
 
-  
+
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+        <p>Littéralement : « peindre avec la lumière ». Le terme plus court de « photo » est très fréquemment utilisé. Dans le cas où l'on parle d'une image photographique, on emploie aussi souvent les termes « image » ou « vue », et, mais de moins en moins depuis l'avènement de la photographie numérique, « tirage » ou « agrandissement ».</p>
+        <p>En français, « photographie » est attesté dès 1832 dans le Dictionnaire général de la langue française de François Raymond mais comme « description de l'histoire naturelle qui traite de la lumière »4,7. Le premier emploi connu de photographie comme « technique de représentation de la réalité et de reproduction d'images à l'aide de procédés fondés sur des réactions chimiques à la lumière et de moyens optiques » figure dans les Carnets d'Hercule Florence, à la date du 21 janvier 1834</p>
       </div>
     </div>
   </div>
