@@ -164,6 +164,7 @@ img::-moz-selection {
 }
 
 header.masthead {
+  height: 800px ! important;
   margin-bottom: 50px;
   background: no-repeat center center;
   background-color: #868e96;

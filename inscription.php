@@ -45,7 +45,43 @@
     </div>
   </header>
 
+
+
+ <!-- Main Content -->
+ <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <form name="sentMessage" id="contactForm" novalidate>
+
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Login</label>
+              <input type="text" class="form-control" placeholder="Login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+  
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+
+          <br>
+
+          <div id="success"></div>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Se connecter</button>
+        </form>
+      </div>
+    </div>
+  </div>
   <!-- Main Content -->
+
+
+  
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
