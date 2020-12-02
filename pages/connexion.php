@@ -11,7 +11,7 @@ $_SESSION['inscription_ok'] = NULL;
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>PHOTOPICS - Connexion</title>
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,6 +31,7 @@ $_SESSION['inscription_ok'] = NULL;
   <!-- Navigation -->
   <?php
  include '../includes/nav-non-connecte.php';
+ include '../fonctions/fonctions.php';
  ?>
 
   <!-- Page Header -->
@@ -51,12 +52,60 @@ $_SESSION['inscription_ok'] = NULL;
 
   <!-- Main Content -->
 
+<?php
 
+
+    @$login = htmlspecialchars($_POST['login']);
+    @$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    if ( isset($_POST['submit']))
+
+          {
+              if ($_POST['login'] != NULL AND $_POST['password'] != NULL)
+
+                  {
+
+
+                    connection_bdd();
+                    $bdd = connection_bdd();
+                    $requete = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = :login');
+                    $requete->execute(array('login' => $_POST['login']));
+                    $données_utilisateur = $requete->fetch();
+                    $bdd = NULL;
+                  
+                    // echo '<pre>';
+                    // print_r($données_utilisateur) ;
+                    // echo '</pre>';
+
+                        if ( $login == @$données_utilisateur['login'] AND password_verify($_POST['password'], $données_utilisateur['password'] ) )
+                        {
+                          echo ' tout est ok, login et mdp';
+                        }
+                        else { echo 'Erreur de login ou de mot de passe';}
+
+
+                  }
+
+              else {echo 'veuillez tout remplir';}    
+              
+          }
+    else
+
+          {
+
+            echo 'bouton submit pas touché';
+          }
+
+
+?>
+
+
+<!-- ---------------------------- formulaire html ------------------------------------------- -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
-        <form name="sentMessage" id="contactForm" novalidate>
+        <form name="connexion"  action="connexion.php" method="post">
           <p class=" text-center text-primary">
             <?php if ( isset($_SESSION['inscription_ok']))
                   {
@@ -67,7 +116,7 @@ $_SESSION['inscription_ok'] = NULL;
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Login</label>
-              <input type="text" class="form-control" placeholder="Login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
+              <input type="text" class="form-control" placeholder="Login"  name="login"  data-validation-required-message="Veuillez saisir votre login.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -75,7 +124,7 @@ $_SESSION['inscription_ok'] = NULL;
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="password" class="form-control" placeholder="Password" name="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -83,7 +132,7 @@ $_SESSION['inscription_ok'] = NULL;
           <br>
 
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Se connecter</button>
+          <button type="submit" name="submit" class="btn btn-primary" id="sendMessageButton">Se connecter</button>
         </form>
       </div>
     </div>
