@@ -9,10 +9,42 @@
         <i class="fas fa-bars"></i>
       </button>
 
+      <?php
+             if (isset($page_index_php))
+             
+             {?>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+
+            
+         
                 <a class="nav-link" href="index.php">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/connexion.php">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/inscription.php">Inscription</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/discussion.php">Discussion</a>
+            </li>
+            </ul>
+        </div>
+        <?php
+             }
+
+             else
+             {
+             ?>
+             <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+
+            
+         
+                <a class="nav-link" href="../index.php">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="connexion.php">Connexion</a>
@@ -25,6 +57,9 @@
             </li>
             </ul>
         </div>
+        <?php
+             }
+             ?>
 
     </div>
 

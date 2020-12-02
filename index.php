@@ -1,3 +1,6 @@
+<?php session_start();
+$_SESSION['inscription_ok'] = NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +30,7 @@
 
   <!-- Navigation -->
  <?php
+ $page_index_php = 1;
  include 'includes/nav-non-connecte.php';
  ?>
 

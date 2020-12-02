@@ -1,3 +1,6 @@
+<?php session_start();
+$_SESSION['inscription_ok'] = NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,15 +14,15 @@
   <title>Clean Blog - Start Bootstrap Theme</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/clean-blog.min.css" rel="stylesheet">
+  <link href="../css/clean-blog.min.css" rel="stylesheet">
 
 </head>
 
@@ -27,7 +30,7 @@
 
   <!-- Navigation -->
   <?php
- include 'includes/nav-non-connecte.php';
+ include '../includes/nav-non-connecte.php';
  ?>
 
   <!-- Page Header -->
@@ -39,7 +42,7 @@
           <div class="page-heading pb-5">
             <h1>Connectez-vous !</h1>
             <span class="subheading">Vous avez des questions ? Nous avons les réponses.</span>
-            <img class='mt-3' src="images/drop-down-arrow.png" alt="fleche">
+            <img class='mt-3' src="../images/drop-down-arrow.png" alt="fleche">
           </div>
         </div>
       </div>
@@ -47,12 +50,20 @@
   </header>
 
   <!-- Main Content -->
+
+
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
         <form name="sentMessage" id="contactForm" novalidate>
-
+          <p class=" text-center text-primary">
+            <?php if ( isset($_SESSION['inscription_ok']))
+                  {
+                    echo 'Vous avez bien été inscrit sur le site';
+                  }
+            ?>
+          </p>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Login</label>
@@ -82,19 +93,19 @@
 
   <!-- Footer -->
   <?php
-  include 'includes/footer.php';
+  include '../includes/footer.php';
   ?>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Contact Form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
+  <script src="../js/jqBootstrapValidation.js"></script>
+  <script src="../js/contact_me.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
+  <script src="../js/clean-blog.min.js"></script>
 
 </body>
 

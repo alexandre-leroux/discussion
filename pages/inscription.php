@@ -8,18 +8,18 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscription</title>
+  <title>Clean Blog - Start Bootstrap Theme</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/clean-blog.min.css" rel="stylesheet">
+  <link href="../css/clean-blog.min.css" rel="stylesheet">
 
 </head>
 
@@ -27,12 +27,12 @@
 
   <!-- Navigation -->
   <?php
- include 'includes/nav-non-connecte.php';
- include 'fonctions/fonctions.php';
+ include '../includes/nav-non-connecte.php';
+ include '../fonctions/fonctions.php';
  ?>
 
   <!-- Page Header -->
-  <header class="masthead vh-100" style="background-image: url('img/about-bg.jpg')">
+  <header class="masthead vh-100" style="background-image: url('../img/about-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -40,7 +40,7 @@
           <div class="page-heading">
             <h1>Rejoingnez l'aventure !</h1>
             <span class="subheading">...et entrez dans un nouveau monde.</span>
-            <img class='mt-3' src="images/drop-down-arrow.png" alt="fleche">
+            <img class='mt-3' src="../images/drop-down-arrow.png" alt="fleche">
           </div>
         </div>
       </div>
@@ -91,15 +91,16 @@ if ( isset($_POST['submit']) )
                               if ( strlen($_POST['password']) >= 8 AND strlen($_POST['password']) <= 15 AND preg_match('#[a-z]#',$_POST['password']) AND  preg_match('#[A-Z]#',$_POST['password']) AND  preg_match('#[\W_]#',$_POST['password']) AND  preg_match('#[0-9]#',$_POST['password']) ) 
                                 
                                   {
-                                    echo 'check';
+                            
                                     $requete_new_user = $bdd->prepare('INSERT INTO utilisateurs(login, password) VALUES(:login, :password)');
                                     $requete_new_user->execute(array(
                                             'login' => $login,                                                                         
                                             'password' => $password,));
                                             echo 'check-2';
+                                             session_start(); 
                                     $_SESSION['inscription_ok'] = 'Vous avez bien été inscrit sur le site';
 
-                                        // header('Location: connexion.php');//redirection
+                                        header('Location: connexion.php');//redirection
                                     
                                   }
 
@@ -144,7 +145,7 @@ if ( isset($_POST['submit']) )
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Choisissez votre login</label>
-              <input name='login' type="text" class="form-control" placeholder="Choisissez votre login" id="Login"  data-validation-required-message="Veuillez saisir votre login.">
+              <input name='login' type="text" class="form-control" placeholder="Choisissez votre login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -152,7 +153,7 @@ if ( isset($_POST['submit']) )
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Mot de passe</label>
-              <input name='password' type="password" class="form-control" placeholder="Mot de passe" id="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input name='password' type="password" class="form-control" placeholder="Mot de passe" id="password" required  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -160,7 +161,7 @@ if ( isset($_POST['submit']) )
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Confirmer le mot de passe</label>
-              <input name='confirm_password' type="password" class="form-control" placeholder="Confirmer le mot de passe" id="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input name='confirm_password' type="password" class="form-control" placeholder="Confirmer le mot de passe" id="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -200,15 +201,15 @@ if ( isset($_POST['submit']) )
 
   <!-- Footer -->
   <?php
-  include 'includes/footer.php';
+  include '../includes/footer.php';
   ?>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
+  <script src="../js/clean-blog.min.js"></script>
 
 </body>
 
