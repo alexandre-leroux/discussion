@@ -31,22 +31,6 @@
  include '../fonctions/fonctions.php';
  ?>
 
-  <!-- Page Header -->
-  <header class="masthead vh-100" style="background-image: url('../img/about-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>Rejoingnez l'aventure !</h1>
-            <span class="subheading">...et entrez dans un nouveau monde.</span>
-            <img class='mt-3' src="../images/drop-down-arrow.png" alt="fleche">
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
 
 <?php
 
@@ -96,11 +80,11 @@ if ( isset($_POST['submit']) )
                                     $requete_new_user->execute(array(
                                             'login' => $login,                                                                         
                                             'password' => $password,));
-                                            echo 'check-2';
+                                        
                                            
                                    
-
-                                        header('Location: inscription-validee.php');//redirection
+                                      $inscription_reussie = 1;
+                                        // header('Location: inscription-validee.php');//redirection
                                     
                                   }
 
@@ -129,6 +113,49 @@ if ( isset($_POST['submit']) )
 
 
 ?>
+
+
+
+  <!-- Page Header -->
+  <?php if ( !isset($inscription_reussie))
+  {?>
+  <header class="masthead vh-100" style="background-image: url('../img/about-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Rejoingnez l'aventure !</h1>
+            <span class="subheading">...et entrez dans un nouveau monde.</span>
+            <img class='mt-3' src="../images/drop-down-arrow.png" alt="fleche">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <?php
+  }
+  else
+  {  ?>
+  <header class="masthead vh-100" style="background-image: url('https://images.unsplash.com/photo-1606749128514-01add013f5c7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto ">
+          <div class="page-heading ">
+            <p class=' h3 p-4 text-uppercase bg-light text-success m-0 display-4'>inscription validée</p>
+            <span class="subheading bg-light text-primary m-0 p-2 pb-3">vous allez être redirigé vers la page de connexion</span>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <meta http-equiv="refresh" content="2;url=connexion.php" />
+  <?php
+  }
+  ?>
+
 
 
 
