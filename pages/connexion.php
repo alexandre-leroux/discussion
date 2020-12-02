@@ -1,5 +1,4 @@
-<?php session_start();
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +32,59 @@
  include '../fonctions/fonctions.php';
  ?>
 
+  
+<?php
+
+
+@$login = htmlspecialchars($_POST['login']);
+@$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+if ( isset($_POST['submit']))
+
+      {
+          if ($_POST['login'] != NULL AND $_POST['password'] != NULL)
+
+              {
+
+
+                connection_bdd();
+                $bdd = connection_bdd();
+                $requete = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = :login');
+                $requete->execute(array('login' => $_POST['login']));
+                $données_utilisateur = $requete->fetch();
+                $bdd = NULL;
+              
+                // echo '<pre>';
+                // print_r($données_utilisateur) ;
+                // echo '</pre>';
+
+                    if ( $login == @$données_utilisateur['login'] AND password_verify($_POST['password'], $données_utilisateur['password'] ) )
+                    {
+                      
+                      $_SESSION['login']=$données_utilisateur['login'];
+                      $_SESSION['id']=$données_utilisateur['id'];
+                 
+                      $connexion_reussie = 1;
+                    
+                    }
+                    else { echo 'Erreur de login ou de mot de passe';}
+
+
+              }
+
+          else {echo 'veuillez tout remplir';}    
+          
+      }
+
+
+
+?>
+  
+
+
   <!-- Page Header -->
+  <?php if ( !isset($connexion_reussie))
+  {?>
   <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1605388862319-eaf1649edb5a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
     <div class="overlay"></div>
     <div class="container">
@@ -48,60 +99,31 @@
       </div>
     </div>
   </header>
-
-  <!-- Main Content -->
-
-<?php
-
-
-    @$login = htmlspecialchars($_POST['login']);
-    @$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    if ( isset($_POST['submit']))
-
-          {
-              if ($_POST['login'] != NULL AND $_POST['password'] != NULL)
-
-                  {
-
-
-                    connection_bdd();
-                    $bdd = connection_bdd();
-                    $requete = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = :login');
-                    $requete->execute(array('login' => $_POST['login']));
-                    $données_utilisateur = $requete->fetch();
-                    $bdd = NULL;
-                  
-                    // echo '<pre>';
-                    // print_r($données_utilisateur) ;
-                    // echo '</pre>';
-
-                        if ( $login == @$données_utilisateur['login'] AND password_verify($_POST['password'], $données_utilisateur['password'] ) )
-                        {
-                          echo ' tout est ok, login et mdp <br>';
-                          $_SESSION['login']=$données_utilisateur['login'];
-                          $_SESSION['id']=$données_utilisateur['id'];
-                          echo $_SESSION['login'].'<br>';
-                          echo $_SESSION['id'].'<br>';
-
-                        }
-                        else { echo 'Erreur de login ou de mot de passe';}
+  <?php
+  }
+  else
+  {  ?>
+  <header class="masthead vh-100" style="background-image: url('https://images.unsplash.com/photo-1606323309671-c51570922278?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto ">
+          <div class="page-heading ">
+            <p class=' h3 p-4 text-uppercase bg-light text-success m-0 display-4'>Connexion reussie</p>
+            <span class="subheading bg-light text-primary m-0 p-2 pb-3">vous allez être redirigé vers la page d'accueil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <meta http-equiv="refresh" content="2;url=../index.php" />
+  <?php
+  }
+  ?>
 
 
-                  }
-
-              else {echo 'veuillez tout remplir';}    
-              
-          }
-    else
-
-          {
-
-            echo 'bouton submit pas touché';
-          }
 
 
-?>
 
 
 <!-- ---------------------------- formulaire html ------------------------------------------- -->
@@ -111,11 +133,6 @@
 
         <form name="connexion"  action="connexion.php" method="post">
           <p class=" text-center text-primary">
-            <?php if ( isset($_SESSION['inscription_ok']))
-                  {
-                    echo 'Vous avez bien été inscrit sur le site';
-                  }
-            ?>
           </p>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">

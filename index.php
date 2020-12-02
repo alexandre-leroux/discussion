@@ -1,6 +1,4 @@
-<?php session_start();
-$_SESSION['inscription_ok'] = NULL;
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
