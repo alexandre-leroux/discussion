@@ -31,12 +31,12 @@
  ?>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1606149408604-b0add195ddfa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
+  <header class="masthead vh-100" style="background-image: url('https://images.unsplash.com/photo-1606149408604-b0add195ddfa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
+    <div class="overlay h-100"></div>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-8 col-md-10 mx-auto h-100">
+          <div class="site-heading h-100 d-flex flex-column justify-content-center">
             <h1>Photopics</h1>
             <span class="subheading">Le blog du photographe</span>
           </div>
