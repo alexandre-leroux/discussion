@@ -120,7 +120,7 @@ if ( isset($_POST['submit']))
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Login</label>
-              <input type="text" class="form-control" placeholder="Login"  name="login"  data-validation-required-message="Veuillez saisir votre login.">
+              <input type="text" class="form-control" placeholder="Login"  name="login" required  data-validation-required-message="Veuillez saisir votre login.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -128,7 +128,7 @@ if ( isset($_POST['submit']))
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password" name="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="password" class="form-control" placeholder="Password" name="password" required data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -144,7 +144,16 @@ if ( isset($_POST['submit']))
     </div>
   </div>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Afin d’interroger les relations qui unissent l’art et le réel, arrêtons-nous sur un art singulier : la photographie. Pourquoi faire choix de la photographie ? Parce qu’aucun art ne semble aussi tributaire de la réalité que celui-ci. En effet, là où d’autres expressions artistiques créent et inventent de façon évidente, la photographie, elle, ne semble pouvoir être autre chose qu’une « image » de la réalité, sa reproduction, un miroir simplement tendu devant le spectacle du monde. Ainsi, la photographie ne fait-elle, au sens premier du terme, que nous proposer un « tirage » de la réalité ? S’agit-il d’un art « réaliste », le plus réaliste de tous, et cela dans le sens le plus faible qui soit, c’est-à-dire dans le sens où cet art se contenterait de reproduire le réel ?</p>
+        <p>En français, « photographie » est attesté dès 1832 dans le Dictionnaire général de la langue française de François Raymond mais comme « description de l'histoire naturelle qui traite de la lumière »4,7. Le premier emploi connu de photographie comme « technique de représentation de la réalité et de reproduction d'images à l'aide de procédés fondés sur des réactions chimiques à la lumière et de moyens optiques » figure dans les Carnets d'Hercule Florence, à la date du 21 janvier 1834</p>
+      </div>
+    </div>
+  </div>
 
+  <hr>
   <hr>
 
   <!-- Footer -->
