@@ -9,8 +9,9 @@
         <i class="fas fa-bars"></i>
       </button>
 
+
       <?php
-             if (isset($page_index_php))
+             if (isset($page_index_php))//modifie les liens selon la page d'origine
              
              {?>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -22,7 +23,8 @@
                 <a class="nav-link" href="index.php">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pages/connexion.php">Connexion</a>
+            <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link" href="pages/connexion.php">Connexion</a> ' ;} ?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link" href="pages/profil.php">'. $_SESSION['login'].'</a> ' ; }?>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="pages/inscription.php">Inscription</a>
@@ -47,7 +49,9 @@
                 <a class="nav-link" href="../index.php">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="connexion.php">Connexion</a>
+         
+                <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link" href="connexion.php">Connexion</a> ' ;} ?>
+                <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link" href="profil.php">'. $_SESSION['login'].'</a> ' ; }?>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="inscription.php">Inscription</a>
