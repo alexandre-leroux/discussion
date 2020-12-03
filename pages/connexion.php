@@ -64,7 +64,7 @@ if ( isset($_POST['submit']))
 
               }
 
-          else {$champs_manquants = 'veuillez tout remplir';}    
+          else {$champs_manquants = 'Veuillez remplir l\'ensemble des champs';}    
           
       }
 
