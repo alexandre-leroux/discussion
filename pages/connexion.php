@@ -102,7 +102,7 @@ if ( isset($_POST['submit']))
 <!-- ---------------------------- formulaire html ------------------------------------------- -->
 
 
-  <div class="container">
+  <div id='form1' class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
@@ -114,7 +114,7 @@ if ( isset($_POST['submit']))
       }
       ?>
 
-        <form name="connexion" id='form1' action="connexion.php#form1"  method="post">
+        <form name="connexion"  action="connexion.php#form1"  method="post">
           <p class=" text-center text-primary">
           </p>
           <div class="control-group">

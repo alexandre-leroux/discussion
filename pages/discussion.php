@@ -70,45 +70,48 @@ if(isset($_SESSION['login']) AND isset($_SESSION['id']) )
 
       connection_bdd();
       $bdd = connection_bdd();
-      $requete = $bdd->query(' SELECT message, date, login FROM messages INNER JOIN utilisateurs ON messages.id_utilisateur = utilisateurs.id');
+      $requete = $bdd->query(' SELECT message, DATE_FORMAT(date, "%d/%m/%Y"), login FROM messages INNER JOIN utilisateurs ON messages.id_utilisateur = utilisateurs.id');
       $donnees_messages = $requete->fetchall();
 
-    echo '<pre>';
-    print_r($donnees_messages);
-    echo '</pre>';
+      echo '<pre>';
+      print_r($donnees_messages);
+      echo '</pre>';
 
-    
+      echo  $_SESSION['login'];
 
 
-}
+
 ?>
 
 
+          <div class="container-fluid d-flex justify-content-center">
+          <table class="table table-striped table-dark w-75">
+            <tbody>
 
-<table class="table table-striped table-dark">
+                  <?php foreach ($donnees_messages as $key => $value )
 
-  <tbody>
-<?php foreach ($donnees_messages as $key => $value )
+                  { 
+                  ?> 
 
-{ $date = $value['date'];
-?> 
+                      <tr>
+                        <td id='td_date_login' class='text-info border-top "'>Message posté le : <?php echo  $value['DATE_FORMAT(date, "%d/%m/%Y")']?> par  <?php echo $value['login']?></td>
+                      </tr>
 
-    <tr>
-      <td class='text-info'>Message posté le : <?php echo  $value['date']?> par  <?php echo $value['login']?></td>
-    </tr>
-    <tr>
-      <td> <?php echo $value['message']?> </td>
-
-    </tr>
+                      <tr>
+                        <td id='td_message'> <?php echo $value['message']?> </td>
+                      </tr>
 
 
-<?php
+                  <?php
+                  }
+                  ?>
+
+          </tbody>
+          </table>
+          </div>
+          <?php
 }
 ?>
-
-</tbody>
-</table>
-
 
 
   <!-- Footer -->
