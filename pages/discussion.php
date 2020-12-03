@@ -33,6 +33,7 @@
   <?php
  include '../includes/nav-non-connecte.php';
  include '../fonctions/fonctions.php';
+
  ?>
 
 
@@ -61,58 +62,136 @@
 
 <?php
 
+// si utilisateur non connecté :
+if ( !isset($_SESSION['login']) AND !isset($_SESSION['id']) )
+
+
+  {?>
+
+      <div class="container ">
+        <div class="row mt-5 mb-5">
+          <div class="col-6 mt-5 mb-5 mx-auto border border-info rounded">
+            <p class="text-center text-danger ">Vous devez être connecté pour accéder à la discussion</p>
+            <div class="text-center m-3 " >
+              <a class="mx-auto text-primary " href="connexion.php">Se connecter</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<?php
+  }
+
+
+
+if (isset($_POST['submit']) AND isset($_SESSION['login']) AND isset($_SESSION['id']) )
+                              
+      {
+
+              if (@$_POST['message']!= NULL ) 
+
+                {
+                  $message = htmlspecialchars($_POST['message']);
+            
+
+           
+                  connection_bdd();
+                  $bdd = connection_bdd();
+                  $requete = $bdd->prepare('INSERT INTO messages (message, id_utilisateur,date) VALUES (:message,:id_utilisateur,NOW())');
+                  $requete->execute(array(
+                    'message'=> $message ,                                                                        
+                    'id_utilisateur'=> $_SESSION['id']
+                  ));
+                  $message_ok = 'message bien envoyé' ;
+                }
+
+              else { $manque_message = 'Vous n\'avez pas saisi de message';} 
+
+
+      }      
+
+
+
+
+
 if(isset($_SESSION['login']) AND isset($_SESSION['id']) )
 
+    {
 
 
-{
+          connection_bdd();
+          $bdd = connection_bdd();
+          $requete = $bdd->query(' SELECT message, DATE_FORMAT(date, "%d/%m/%Y"), login FROM messages INNER JOIN utilisateurs ON messages.id_utilisateur = utilisateurs.id');
+          $donnees_messages = $requete->fetchall();
+          $bdd = null;
+          // echo '<pre>';
+          // print_r($donnees_messages);
+          // echo '</pre>';
+
+          // echo  $_SESSION['login'];
+
+   
 
 
-      connection_bdd();
-      $bdd = connection_bdd();
-      $requete = $bdd->query(' SELECT message, DATE_FORMAT(date, "%d/%m/%Y"), login FROM messages INNER JOIN utilisateurs ON messages.id_utilisateur = utilisateurs.id');
-      $donnees_messages = $requete->fetchall();
+                         
+          
+    ?>
 
-      echo '<pre>';
-      print_r($donnees_messages);
-      echo '</pre>';
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
 
-      echo  $_SESSION['login'];
+              <table class="table table-striped table-dark w-75">
+                <tbody>
 
+                      <?php foreach ($donnees_messages as $key => $value )
 
+                      { 
+                            ?> 
 
-?>
+                                <tr>
+                                  <td id='td_date_login' class='text-info border-top "'>Message posté le : <?php echo  $value['DATE_FORMAT(date, "%d/%m/%Y")']?> par  <?php echo $value['login']?></td>
+                                </tr>
 
-
-          <div class="container-fluid d-flex justify-content-center">
-          <table class="table table-striped table-dark w-75">
-            <tbody>
-
-                  <?php foreach ($donnees_messages as $key => $value )
-
-                  { 
-                  ?> 
-
-                      <tr>
-                        <td id='td_date_login' class='text-info border-top "'>Message posté le : <?php echo  $value['DATE_FORMAT(date, "%d/%m/%Y")']?> par  <?php echo $value['login']?></td>
-                      </tr>
-
-                      <tr>
-                        <td id='td_message'> <?php echo $value['message']?> </td>
-                      </tr>
+                                <tr>
+                                  <td id='td_message'> <?php echo $value['message']?> </td>
+                                </tr>
 
 
-                  <?php
-                  }
-                  ?>
+                            <?php
+                      }
 
-          </tbody>
-          </table>
-          </div>
-          <?php
-}
-?>
+                      ?>
 
+                </tbody>
+
+
+                
+              </table>
+
+
+              <form class='w-50 mt-5 mb-5' action='discussion.php#ancre_message' method='post'>
+     
+                <div class="form-group mt-5 mb-5">
+                  <label for="exampleFormControlTextarea1">Poster une réponse</label>
+                  <textarea name='message' class="form-control"  rows="5"></textarea>
+                  <p class="text-center text-danger"><?php if(isset($manque_message)){echo $manque_message;}?></p>
+                  <p class="text-center text-primary"><?php if(isset($message_ok)){echo $message_ok;}?></p>
+                </div>
+
+                <button name ='submit' type="submit" class="btn btn-primary mx-auto ">Envoyer</button>
+
+              </form>
+
+
+    </div>
+
+<?php
+    }
+    ?>
+
+
+
+<div id="ancre_message"></div>
 
   <!-- Footer -->
   <?php

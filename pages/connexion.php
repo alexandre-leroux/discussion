@@ -108,7 +108,7 @@ if ( isset($_POST['submit']))
 
       <?php if ( isset($connexion_reussie))
       {?>
-       <p class='text-center text-success'>Connexion reussie, vous allez être redirigé vers la page d'acueil</p>
+       <p class='text-center text-success'>Connexion reussie, vous allez être redirigé vers la page d'accueil</p>
        <meta http-equiv="refresh" content="2;url=../index.php" />
       <?php
       }
