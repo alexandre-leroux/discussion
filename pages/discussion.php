@@ -172,8 +172,10 @@ if(isset($_SESSION['login']) AND isset($_SESSION['id']) )
               <form class='w-50 mt-5 mb-5' action='discussion.php#ancre_message' method='post'>
      
                 <div class="form-group mt-5 mb-5">
-                  <label for="exampleFormControlTextarea1">Poster une réponse</label>
-                  <textarea name='message' class="form-control"  rows="5"></textarea>
+
+                  <label for="text_area" class="text-info">Ecrire une réponse <span id="text_max_140">( 140 caractères max.)</span></label>
+                  <textarea id="text_area" name='message' class="form-control"  maxlength="140" rows="3"></textarea>
+
                   <p class="text-center text-danger"><?php if(isset($manque_message)){echo $manque_message;}?></p>
                   <p class="text-center text-primary"><?php if(isset($message_ok)){echo $message_ok;}?></p>
                 </div>

@@ -2,7 +2,10 @@
 
     <div class="container">
 
-      <a class="navbar-brand" id='logo_photopics' href="../index.php">PHOTOPICS</a>
+    <?php  if(!isset($page_index_php)) { echo '  <a class="navbar-brand" id=\'logo_photopics\' href="../index.php">PHOTOPICS</a> ' ;} ?>
+    <?php  if(isset($page_index_php)) { echo ' <a class="navbar-brand" id=\'logo_photopics\' href="index.php">PHOTOPICS</a> ' ; }?>
+
+
 
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
@@ -28,7 +31,7 @@
             </li>
             <li class="nav-item">
             <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link " href="pages/inscription.php">Inscription</a> ' ;} ?>
-            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="pages/profil.php">Déconnexion</a> ' ; }?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="pages/deconnexion.php">Déconnexion</a> ' ; }?>
                 <!-- <a class="nav-link" href="pages/inscription.php">Inscription</a> -->
             </li>
             <li class="nav-item">
@@ -57,7 +60,7 @@
             </li>
             <li class="nav-item">
             <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link " href="inscription.php">Inscription</a> ' ;} ?>
-            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="profil.php">Déconnexion</a> ' ; }?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="deconnexion.php">Déconnexion</a> ' ; }?>
   
             </li>
             <li class="nav-item">
