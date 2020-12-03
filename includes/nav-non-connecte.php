@@ -24,10 +24,12 @@
             </li>
             <li class="nav-item">
             <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link" href="pages/connexion.php">Connexion</a> ' ;} ?>
-            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link" href="pages/profil.php">'. $_SESSION['login'].'</a> ' ; }?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="pages/profil.php">'. $_SESSION['login'].'</a> ' ; }?>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pages/inscription.php">Inscription</a>
+            <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link " href="pages/inscription.php">Inscription</a> ' ;} ?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="pages/profil.php">Déconnexion</a> ' ; }?>
+                <!-- <a class="nav-link" href="pages/inscription.php">Inscription</a> -->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="pages/discussion.php">Discussion</a>
@@ -51,10 +53,12 @@
             <li class="nav-item">
          
                 <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link" href="connexion.php">Connexion</a> ' ;} ?>
-                <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link" href="profil.php">'. $_SESSION['login'].'</a> ' ; }?>
+                <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="profil.php">'. $_SESSION['login'].'</a> ' ; }?>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="inscription.php">Inscription</a>
+            <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link " href="inscription.php">Inscription</a> ' ;} ?>
+            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link text-info" href="profil.php">Déconnexion</a> ' ; }?>
+  
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="discussion.php">Discussion</a>
