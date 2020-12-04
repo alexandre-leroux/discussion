@@ -33,9 +33,84 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
   <!-- Navigation -->
   <?php
  include '../includes/nav-non-connecte.php';
+ include '../fonctions/fonctions.php';
  ?>
 
+<?php
+
+        if ( isset($_POST['submit']))//check bouton submit
+
+              {
+                      echo 'submit ok <br>';
+
+
+
+                    if ( $_POST['login'] != NULL)// check si login a été rentré
+
+                        {
+                          echo 'login ok <br>';
+                          if ( $_POST['original_password'] != NULL)// on vérifie le password d'origine pourmodifier le login
+
+                              {
+                                echo 'original_password ok <br>';
+                                echo $_SESSION['id'].' <br>';
+
+                                connection_bdd();
+                                $bdd = connection_bdd();
+                                $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
+                                $requete->execute(array(
+                                  'id' => $_SESSION['id']
+                                ));
+                                $donnees = $requete->fetchall();
+                                $bdd = null;
+
+                                if(password_verify($_POST['original_password'], $donnees[0]['password']  ))// si ok, on peut updater le login
+                                    {
+                                      
+                                      echo 'password ok bien verifié <br>';
+                                      connection_bdd();
+                                      $bdd = connection_bdd();
+                                      $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
+                                      $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
+                                      echo 'login changé <br>';
+                                    }
+
+
+
+                                echo '<pre>';
+                                print_r($donnees) ;
+                                echo '</pre>';
+
+                                // password_verify($_POST['original_password'], $donnees['password']);
+                              }
+
+
+                        }
+
+
+
+
+
+
+
+
+              }
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
   <!-- Page Header -->
+
   <header class="masthead vh-100 d-flex align-items-center" style="background-image: url('img/post-bg.jpg')">
     <div class="overlay w-100 bg-primary "></div>
     <div class="container w-100 bg-success ">
@@ -49,39 +124,39 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
               <p class='text-center'>vous êtes connecté en tant que <span class='text-primary'><?php echo $_SESSION["login"];?></span></p>
 
 
-                <form>
+                <form action="profil.php"  method="post" >
 
                   <div class="form-group mb-5 row d-flex justify-content-between">
                     <label for="inputEmail3" class="col-sm-4 col-form-label">Changer votre pseudo :</label>
                     <div class="col-sm-6">
-                      <input type="email" class="form-control" id="inputEmail3">
+                      <input type="text" name='login' class="form-control">
                     </div>
                   </div>
 
                   <div class="form-group row d-flex justify-content-between">
                     <label for="inputPassword3" class="col-sm-4 col-form-label">Changer votre mot de passe :</label>
                     <div class="col-sm-6">
-                      <input type="password" class="form-control" id="inputPassword3">
+                      <input type="password" name='password' class="form-control">
                     </div>
                   </div>
 
                    <div class="form-group mb-5 row d-flex justify-content-between">
                     <label for="inputPassword3" class="col-sm-6 col-form-label">Confirmer le nouveau mot de passe :</label>
                     <div class="col-sm-6">
-                      <input type="password" class="form-control" id="inputPassword3">
+                      <input type="password" name='confirm_password' class="form-control">
                     </div>
                   </div>
 
                    <div class="form-group mt-5 d-flex flex-column justify-content-center align-items-center">
                     <label for="inputPassword3" class="col-sm-8 text-center col-form-label">Saisir votre mot de passe actuel :</label>
                     <div class="col-sm-4">
-                      <input type="password" class="form-control" id="inputPassword3">
+                      <input type="password" name='original_password' class="form-control" >
                     </div>
                   </div>
 
                   <div class="form-group mt-5 row">
                     <div class="col-sm-10 mx-auto d-flex justify-content-center">
-                      <button type="submit" class="btn text-center btn-primary">Valider les modifications</button>
+                      <button name="submit" type="submit" class="btn text-center btn-primary">Valider les modifications</button>
                     </div>
                   </div>
 
