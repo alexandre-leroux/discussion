@@ -40,63 +40,92 @@ echo $_SESSION['id'].'<br>';
  ?>
 
 <?php
+@$login = htmlspecialchars($_POST['login']);
+@$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+@$confirm_password = password_hash($_POST['confirm_password'], PASSWORD_DEFAULT);
+@$original_password = password_hash($_POST['original_password'], PASSWORD_DEFAULT);
 
 
-        if ( isset($_POST['submit']))//check bouton submit
+        if ( isset($_POST['submit']) )//check bouton submit
 
               {
-                      echo 'submit ok <br>';
+                    if ( $_POST['login'] != NULL)// check si login a été rentré// --------------------------------------------------------------changement login--------------------------------------------------------
+
+                          {
+                                connection_bdd();// check si loginexiste déjà
+                                $bdd = connection_bdd();
+                                recherche_login_existant($bdd);
+                                $donnees_uilisateur = recherche_login_existant($bdd);
+                                $bdd = NULL;
+
+                                if ( @$donnees_uilisateur['login'] == NULL)// pas  de login deja existant, on passe à la suite
+
+                                      {
+
+                                            if ( $original_password != NULL)// on vérifie le password d'origine pour modifier le login
+
+                                                  {
+                                                        connection_bdd();
+                                                        $bdd = connection_bdd();
+                                                        $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
+                                                        $requete->execute(array('id' => $_SESSION['id']));
+                                                        $donnees = $requete->fetchall();
+                                                        $bdd = NULL;
+
+                                                        if (password_verify($_POST['original_password'], $donnees[0]['password']  ))// si ok, on peut updater le login
+                                                                
+                                                              {
+                                                                connection_bdd();
+                                                                $bdd = connection_bdd();
+                                                                $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
+                                                                $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
+                                                                $bdd = NULL;
+                                                                $login_modifie = 'Le login a bien été modifié';
+                                                                echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
+                                                              }
 
 
+                                                        else  { $erreur_password = 'Mot de passe incorrect';}
 
-                    if ( $_POST['login'] != NULL)// check si login a été rentré
 
-                        {
-                          echo 'login ok <br>';
-                          if ( $_POST['original_password'] != NULL)// on vérifie le password d'origine pourmodifier le login
+                                                  }
+                                          
+                                            else  { $saisir_password = 'Veuillez entrer votre mot de passe';}
+                                      }    
+                          
+                          
+                                else {$login_deja_pris = 'Ce login est déjà utilisé, veuillez en choisir un autre';}
 
-                              {
-                                    echo 'original_password ok <br>';
-                                    echo $_SESSION['id'].' <br>';
 
-                                    connection_bdd();
-                                    $bdd = connection_bdd();
-                                    $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
-                                    $requete->execute(array(
-                                      'id' => $_SESSION['id']
-                                    ));
-                                    $donnees = $requete->fetchall();
-                                    $bdd = null;
+                          } 
 
-                                    if(password_verify($_POST['original_password'], $donnees[0]['password']  ))// si ok, on peut updater le login
-                                            {
+                if (  $_POST['confirm_password'] And $_POST['password'] != NULL )// --------------------------------------------------------------changement password--------------------------------------------------------
+
+                          {
+                              if ( preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#',$_POST['password']) )
+
+                                      {
+                                              if ( $_POST['confirm_password'] == $_POST['password']  )
+                                                    {
+                                                      echo ' ouiiiiiiiiiiiiiiiii <br>';
+                                                      echo $_POST['confirm_password'].'<br>';
+                                                      var_dump($_POST['confirm_password']);
+                                                      echo ' ouiiiiiiiiiiiiiiiii <br>';
+                                                    }
+                              
+                                              else { echo ' Les mots de passe ne sont pas identiques';}  
                                               
-                                              echo 'password ok bien verifié <br>';
-                                              connection_bdd();
-                                              $bdd = connection_bdd();
-                                              $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
-                                              $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
-                                              echo 'login changé <br>';
-                                            }
-
-
-
-                                    echo '<pre>';
-                                    print_r($donnees) ;
-                                    echo '</pre>';
-
-                                // password_verify($_POST['original_password'], $donnees['password']);
-                              }
-
-
-                        }
-
-
-
-
-
-
-
+                                      }    
+                              
+                              else {echo 'le mot de passe doit contenir entre 8 et 15 caractères, avec au minimum : Une majuscule, un chiffre et un caractère spécial.';}
+  
+                          }
+            
+                else
+                {
+                  echo ' nonnnnnnnnnnnnnnnnnnnnnnn';
+                }
+                
 
               }
 
@@ -121,9 +150,11 @@ echo $_SESSION['id'].'<br>';
       <div class="row bg-info">
         <div class="col-lg-10 col-md-10 mx-auto w-100 bg-warning">
           <div class="post-heading bg-dark">
+          
 
-
-
+              <p class="text-center text-primary"><?php if(isset($login_modifie)){echo $login_modifie;}?></p>
+              <p class="text-center text-danger"><?php if(isset($champs_vides)){echo $champs_vides;}?></p>
+              <p class="text-center text-danger"><?php if(isset($login_deja_pris)){echo $login_deja_pris;}?></p>
 
               <p class='text-center'>vous êtes connecté en tant que <span class='text-primary'><?php echo $_SESSION["login"];?></span></p>
 
@@ -157,7 +188,9 @@ echo $_SESSION['id'].'<br>';
                       <input type="password" name='original_password' class="form-control" >
                     </div>
                   </div>
-
+                  <p class="text-center text-danger"><?php if(isset($saisir_password)){echo $saisir_password;}?></p>
+                  <p class="text-center text-danger"><?php if(isset($erreur_password)){echo $erreur_password;}?></p>
+                  
                   <div class="form-group mt-5 row">
                     <div class="col-sm-10 mx-auto d-flex justify-content-center">
                       <button name="submit" type="submit" class="btn text-center btn-primary">Valider les modifications</button>
