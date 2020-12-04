@@ -56,34 +56,34 @@ echo $_SESSION['id'].'<br>';
                           if ( $_POST['original_password'] != NULL)// on vérifie le password d'origine pourmodifier le login
 
                               {
-                                echo 'original_password ok <br>';
-                                echo $_SESSION['id'].' <br>';
+                                    echo 'original_password ok <br>';
+                                    echo $_SESSION['id'].' <br>';
 
-                                connection_bdd();
-                                $bdd = connection_bdd();
-                                $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
-                                $requete->execute(array(
-                                  'id' => $_SESSION['id']
-                                ));
-                                $donnees = $requete->fetchall();
-                                $bdd = null;
+                                    connection_bdd();
+                                    $bdd = connection_bdd();
+                                    $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
+                                    $requete->execute(array(
+                                      'id' => $_SESSION['id']
+                                    ));
+                                    $donnees = $requete->fetchall();
+                                    $bdd = null;
 
-                                if(password_verify($_POST['original_password'], $donnees[0]['password']  ))// si ok, on peut updater le login
-                                    {
-                                      
-                                      echo 'password ok bien verifié <br>';
-                                      connection_bdd();
-                                      $bdd = connection_bdd();
-                                      $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
-                                      $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
-                                      echo 'login changé <br>';
-                                    }
+                                    if(password_verify($_POST['original_password'], $donnees[0]['password']  ))// si ok, on peut updater le login
+                                            {
+                                              
+                                              echo 'password ok bien verifié <br>';
+                                              connection_bdd();
+                                              $bdd = connection_bdd();
+                                              $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
+                                              $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
+                                              echo 'login changé <br>';
+                                            }
 
 
 
-                                echo '<pre>';
-                                print_r($donnees) ;
-                                echo '</pre>';
+                                    echo '<pre>';
+                                    print_r($donnees) ;
+                                    echo '</pre>';
 
                                 // password_verify($_POST['original_password'], $donnees['password']);
                               }
