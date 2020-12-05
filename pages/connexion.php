@@ -2,9 +2,7 @@
 if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../index.php');}?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -15,7 +13,6 @@ if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../in
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link href="../css/clean-blog.min.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -52,15 +49,16 @@ if ( isset($_POST['submit']))
             
 
                     if ( $login == @$données_utilisateur['login'] AND password_verify($_POST['password'], $données_utilisateur['password'] ) )//si oui, on teste le password
-                    {
-                      
-                      $_SESSION['login']=$données_utilisateur['login'];
-                      $_SESSION['id']=$données_utilisateur['id'];
-                 
-                      $connexion_reussie = 1;
                     
-                    }
-                    else {  $erreur_login_mdp = 'Erreur de login ou de mot de passe';}
+                          {
+                            
+                            $_SESSION['login']=$données_utilisateur['login'];
+                            $_SESSION['id']=$données_utilisateur['id'];
+                      
+                            $connexion_reussie = 1;
+                          
+                          }
+                          else {  $erreur_login_mdp = 'Erreur de login ou de mot de passe';}
 
 
               }

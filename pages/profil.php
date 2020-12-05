@@ -1,11 +1,8 @@
 <?php session_start();
 if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../index.php');}
-// echo $_SESSION['login'].'<br>';
-// echo $_SESSION['id'].'<br>';
 ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,22 +19,18 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
 <body>
 
   <!-- Navigation -->
-  <?php
-   include '../fonctions/fonctions.php';
+<?php
+  include '../fonctions/fonctions.php';
+  
 //pour updater le login depuis la bdd, et que l'affichage dans la nav et le menu change
- connection_bdd();
+  connection_bdd();
   $bdd = connection_bdd();
   $requete = $bdd->prepare('SELECT login FROM utilisateurs WHERE id = :id');
   $requete->execute(array( 'id' => $_SESSION['id']));
   $donnees = $requete->fetchall();
   $bdd=NULL;
-
-                              //  echo '<pre>';
-                              //  print_r($donnees) ;
-                              //  echo '</pre>';
   $_SESSION['login'] = $donnees[0]['login'];
- include '../includes/nav-non-connecte.php';
-
+  include '../includes/nav-non-connecte.php';
  ?>
 
 <?php

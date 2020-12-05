@@ -1,8 +1,6 @@
-<?php session_start();
-
-?>
+<?php session_start();?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -12,16 +10,10 @@
   <meta name="author" content="">
 
   <title>PHOTOPICS - Discussion</title>
-
-  <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
   <link href="../css/clean-blog.min.css" rel="stylesheet">
 
 </head>
@@ -30,11 +22,10 @@
 
 
   <!-- Navigation -->
-  <?php
- include '../includes/nav-non-connecte.php';
- include '../fonctions/fonctions.php';
-
- ?>
+<?php
+  include '../includes/nav-non-connecte.php';
+  include '../fonctions/fonctions.php';
+?>
 
 
 
@@ -93,7 +84,6 @@ if (isset($_POST['submit']) AND isset($_SESSION['login']) AND isset($_SESSION['i
 
                 {
                   $message = htmlspecialchars($_POST['message']);
-            
 
            
                   connection_bdd();
@@ -125,16 +115,7 @@ if(isset($_SESSION['login']) AND isset($_SESSION['id']) )
           $requete = $bdd->query(' SELECT message, DATE_FORMAT(date, "%d/%m/%Y"), login FROM messages INNER JOIN utilisateurs ON messages.id_utilisateur = utilisateurs.id');
           $donnees_messages = $requete->fetchall();
           $bdd = null;
-          // echo '<pre>';
-          // print_r($donnees_messages);
-          // echo '</pre>';
-
-          // echo  $_SESSION['login'];
-
-   
-
-
-                         
+         
           
     ?>
 
