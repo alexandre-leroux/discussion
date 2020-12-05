@@ -170,12 +170,12 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
 
   <!-- Page Header -->
 
-  <header class="masthead vh-100 d-flex align-items-center" style="background-image: url('img/post-bg.jpg')">
-    <div class="overlay h-100 bg-primary "></div>
-    <div class="container h-100  bg-success ">
-      <div class="row h-100 bg-info">
-        <div class="col-lg-10 h-100 col-md-10 mx-auto w-100 bg-warning d-flex align-items-center">
-          <div class="post-heading h-75 w-100 bg-dark ">
+  <header class="masthead vh-100 d-flex align-items-center" style="background-image: url('https://images.unsplash.com/photo-1605445449313-e89bb6d265da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2061&q=80')">
+    <div class="overlay h-100  "></div>
+    <div class="container h-100   ">
+      <div class="row h-100 ">
+        <div class="col-lg-10 h-100 col-md-10 mx-auto w-100  d-flex align-items-center">
+          <div class="post-heading  w-100 bg-dark p-3 rounded  ">
           
 
               <p class="text-center text-primary"><?php if(isset($login_modifie)){echo $login_modifie;}?></p>
@@ -190,7 +190,7 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
               <p class='text-center'>vous êtes connecté en tant que <span class='text-primary'><?php echo $_SESSION["login"];?></span></p>
 
 
-                <form class='bg-primary ' action="profil.php"  method="post" >
+                <form class=' ' action="profil.php"  method="post" >
 
                   <div class="form-group mb-5 row d-flex justify-content-between">
                     <label for="inputEmail3" class="col-sm-4 col-form-label">Changer votre pseudo :</label>
