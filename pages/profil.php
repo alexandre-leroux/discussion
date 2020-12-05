@@ -1,7 +1,7 @@
 <?php session_start();
 if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../index.php');}
-echo $_SESSION['login'].'<br>';
-echo $_SESSION['id'].'<br>';
+// echo $_SESSION['login'].'<br>';
+// echo $_SESSION['id'].'<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,10 +30,11 @@ echo $_SESSION['id'].'<br>';
   $requete = $bdd->prepare('SELECT login FROM utilisateurs WHERE id = :id');
   $requete->execute(array( 'id' => $_SESSION['id']));
   $donnees = $requete->fetchall();
+  $bdd=NULL;
 
-                               echo '<pre>';
-                               print_r($donnees) ;
-                               echo '</pre>';
+                              //  echo '<pre>';
+                              //  print_r($donnees) ;
+                              //  echo '</pre>';
   $_SESSION['login'] = $donnees[0]['login'];
  include '../includes/nav-non-connecte.php';
 
@@ -78,7 +79,7 @@ echo $_SESSION['id'].'<br>';
                                                                 connection_bdd();
                                                                 $bdd = connection_bdd();
                                                                 $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
-                                                                $requete->execute(array('login'=>$_POST['login'], 'id'=>$_SESSION['id']));
+                                                                $requete->execute(array('login'=>$login, 'id'=>$_SESSION['id']));
                                                                 $bdd = NULL;
                                                                 $login_modifie = 'Le login a bien été modifié';
                                                                 echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
@@ -107,32 +108,57 @@ echo $_SESSION['id'].'<br>';
                                       {
                                               if ( $_POST['confirm_password'] == $_POST['password']  )
                                                     {
-                                                      echo ' ouiiiiiiiiiiiiiiiii <br>';
-                                                      echo $_POST['confirm_password'].'<br>';
-                                                      var_dump($_POST['confirm_password']);
-                                                      echo ' ouiiiiiiiiiiiiiiiii <br>';
+                                                      connection_bdd();
+                                                      $bdd = connection_bdd();
+                                                      $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
+                                                      $requete->execute(array('id' => $_SESSION['id']));
+                                                      $donnees = $requete->fetchall();
+                                                      $bdd = NULL;
+
+                                                         if (password_verify($_POST['original_password'], $donnees[0]['password']  ))
+
+                                                                  { 
+                                                                    connection_bdd();
+                                                                    $bdd = connection_bdd();
+                                                                    $requete = $bdd->prepare('UPDATE utilisateurs SET password=:password WHERE id=:id');
+                                                                    $requete->execute(array('password'=>$password, 'id'=>$_SESSION['id']));
+                                                                    $bdd = NULL;
+                                                                  
+                                                                   $mot_passe_change = 'Votre mot de passe a bien été mis à jour';
+                                                                   echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
+                                                                  
+                                                                  }
+                                                        else { $erreur_password = 'Mot de passe incorrect'; }
+                                                   
                                                     }
                               
-                                              else { echo ' Les mots de passe ne sont pas identiques';}  
+                                              else { $mdp_pas_identiques = ' Les mots de passe ne sont pas identiques';}  
                                               
                                       }    
                               
-                              else {echo 'le mot de passe doit contenir entre 8 et 15 caractères, avec au minimum : Une majuscule, un chiffre et un caractère spécial.';}
+                              else {$erreur_format_mdp = 'le mot de passe doit contenir entre 8 et 15 caractères, avec au minimum : Une majuscule, un chiffre et un caractère spécial.';}
   
+
                           }
-            
-                else
-                {
-                  echo ' nonnnnnnnnnnnnnnnnnnnnnnn';
-                }
-                
-
-              }
 
 
+            // ---------------------------------------cas de mauvaise saisi de formulaire
+               if ( $_POST['confirm_password']== NULL AND $_POST['password']== NULL AND $_POST['login'] == NULL  )
+
+                    {$tous_champs_vides = 'Vous n\'avez pas saisi le formulaire correctement';}
 
 
+               if ( $_POST['confirm_password']== NULL AND $_POST['password']!= NULL )
 
+                    {$tous_champs_vides = 'Vous n\'avez pas saisi le formulaire correctement';}
+
+
+               if ( $_POST['confirm_password']!= NULL AND $_POST['password']== NULL )
+
+                    {$tous_champs_vides = 'Vous n\'avez pas saisi le formulaire correctement';}
+      
+
+                    }
 
 
 
@@ -145,21 +171,26 @@ echo $_SESSION['id'].'<br>';
   <!-- Page Header -->
 
   <header class="masthead vh-100 d-flex align-items-center" style="background-image: url('img/post-bg.jpg')">
-    <div class="overlay w-100 bg-primary "></div>
-    <div class="container w-100 bg-success ">
-      <div class="row bg-info">
-        <div class="col-lg-10 col-md-10 mx-auto w-100 bg-warning">
-          <div class="post-heading bg-dark">
+    <div class="overlay h-100 bg-primary "></div>
+    <div class="container h-100  bg-success ">
+      <div class="row h-100 bg-info">
+        <div class="col-lg-10 h-100 col-md-10 mx-auto w-100 bg-warning d-flex align-items-center">
+          <div class="post-heading h-75 w-100 bg-dark ">
           
 
               <p class="text-center text-primary"><?php if(isset($login_modifie)){echo $login_modifie;}?></p>
+              <p class="text-center text-primary"><?php if(isset($mot_passe_change)){echo $mot_passe_change;}?></p>
               <p class="text-center text-danger"><?php if(isset($champs_vides)){echo $champs_vides;}?></p>
               <p class="text-center text-danger"><?php if(isset($login_deja_pris)){echo $login_deja_pris;}?></p>
-
+              <p class="text-center text-danger"><?php if(isset($mdp_pas_identiques)){echo $mdp_pas_identiques;}?></p>
+              <p class="text-center text-danger"><?php if(isset($erreur_format_mdp)){echo $erreur_format_mdp;}?></p>
+              <p class="text-center text-danger"><?php if(isset($tous_champs_vides)){echo $tous_champs_vides;}?></p>
+              
+              
               <p class='text-center'>vous êtes connecté en tant que <span class='text-primary'><?php echo $_SESSION["login"];?></span></p>
 
 
-                <form action="profil.php"  method="post" >
+                <form class='bg-primary ' action="profil.php"  method="post" >
 
                   <div class="form-group mb-5 row d-flex justify-content-between">
                     <label for="inputEmail3" class="col-sm-4 col-form-label">Changer votre pseudo :</label>
@@ -185,7 +216,7 @@ echo $_SESSION['id'].'<br>';
                    <div class="form-group mt-5 d-flex flex-column justify-content-center align-items-center">
                     <label for="inputPassword3" class="col-sm-8 text-center col-form-label">Saisir votre mot de passe actuel :</label>
                     <div class="col-sm-4">
-                      <input type="password" name='original_password' class="form-control" >
+                      <input type="password" name='original_password' class="form-control" required >
                     </div>
                   </div>
                   <p class="text-center text-danger"><?php if(isset($saisir_password)){echo $saisir_password;}?></p>
